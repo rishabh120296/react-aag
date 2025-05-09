@@ -1,63 +1,63 @@
-// Part 1
-// const heading = React.createElement('h1',{id:'heading'},'Hello World from React')
-// const root = ReactDOM.createRoot(document.getElementById('root'))
-// root.render(heading)
-
-// Part2
-
-// <div id='parent'>
-//     <div id='child1'>
-//         <h1>I am H1 Tag</h1>
-//         <h2>I am H2 Tag</h2>
-//     </div>
-//     <div id='child2'>
-//         <h1>I am H1 Tag</h1>
-//         <h2>I am H2 Tag</h2>
-//     </div>
-// </div>
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", { id: "h1" }, "I am h1 tag"),
-    React.createElement("h2", { id: "h2" }, "I am h2 tag"),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", { id: "h3" }, "I am h1 tag"),
-    React.createElement("h2", { id: "h4" }, "I am h2 tag"),
-  ]),
-]);
-
-console.log(parent);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const heading2 = <span>I am sample element</span>
-//root.render(parent)
-const jsxheading = <h1>Hello from jsx element {heading2}</h1>;
-console.log(jsxheading);
-//root.render(jsxheading)
-
-const Title = () => <h1>Hello from jsx</h1>;
-const HeadingComponent1 = () => (
-  <h1 className="mycomponent">Hi from heading 1 componenet</h1>
-);
-
-const HeadingComponent2 = () => {
-    //3 ways to call componenet inside componenet. {} means js code so normal function call also we can do to put componenet inside componenet
-    // element inside component also can be done using {}
+const HeaderComponent = () => {
   return (
-    <div>
-      {Title()}  
-      {100 + 2}
-      {jsxheading}
-      <Title></Title>      
-      <HeadingComponent1 />
-      <h1 id="component2">Hi from another heading component</h1>
+    <div id="Header" className="flex-class-1">
+      <img
+        className="img-logo"
+        src="https://img.freepik.com/premium-vector/good-food-logo-design_79169-10.jpg?semt=ais_hybrid&w=740"
+      />
+      <div className="flex-class-2">
+      <a className="margin">Home</a>
+      <a className="margin">About Us</a>
+      <a className="margin">Cart</a>
+      </div>
     </div>
   );
 };
 
-root.render(<HeadingComponent2 />);
+const RestaurantCard = () => {
+  return (
+    <div className="res-card">
+      <img
+        className="food-img"
+        src="https://vismaifood.com/storage/app/uploads/public/6cb/0df/a6f/thumb__700_0_0_0_auto.jpg"
+      />
+      <div id="name">Meghna Biryani</div>
+      <div id="Rating">4.0</div>
+      <div id="time">30 mins</div>
+    </div>
+  );
+};
 
-//
+const BodyComponent = () => {
+  return (
+  <div className="flex-class-3">
+  <RestaurantCard />
+  <RestaurantCard />
+  <RestaurantCard />
+  <RestaurantCard />
+  <RestaurantCard />
+  <RestaurantCard />
+  <RestaurantCard />
+  <RestaurantCard />
+  <RestaurantCard />
+  <RestaurantCard />
+  </div>
+
+  )
+};
+
+const AppComponent = () => {
+  return (
+    <div>
+      <HeaderComponent/>
+      <BodyComponent />
+    </div>
+  );
+};
+
+root.render(<AppComponent />);
