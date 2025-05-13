@@ -1,11 +1,13 @@
 import RestaurantCard from "./RestaurantCard";
 import ShimerComponent from "./Shimer";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const BodyComponent = () => {
   const [listOfRestaurants, setlistOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurant] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     //console.log("FETCH");
     fetch_data();
@@ -71,7 +73,12 @@ const BodyComponent = () => {
       </div>
       <div className="res-card-container">
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resinfo={restaurant.info} />
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
+          >
+            <RestaurantCard resinfo={restaurant.info} />
+          </Link>
         ))}
       </div>
     </div>
