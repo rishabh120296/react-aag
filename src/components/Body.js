@@ -1,12 +1,14 @@
+import useOnlineStatus from "../utils/useOnlineStatus";
 import RestaurantCard from "./RestaurantCard";
 import ShimerComponent from "./Shimer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-
 const BodyComponent = () => {
   const [listOfRestaurants, setlistOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurant] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const onlineStatus = useOnlineStatus();
 
   useEffect(() => {
     //console.log("FETCH");
@@ -26,6 +28,10 @@ const BodyComponent = () => {
     setlistOfRestaurants(data);
     setFilteredRestaurant(data);
   };
+
+  if (!onlineStatus) {
+    return <h1>Hi, You are offline!!☹️ Please check your internet🛜</h1>;
+  }
 
   return listOfRestaurants.length === 0 ? (
     <ShimerComponent></ShimerComponent>
