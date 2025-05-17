@@ -1,6 +1,6 @@
 import { useRouteError } from "react-router";
 
-ErrorComponent = () => {
+const ErrorComponent = () => {
   const error = useRouteError();
   console.log(error);
   return (

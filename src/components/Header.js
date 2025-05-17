@@ -8,27 +8,30 @@ const HeaderComponent = () => {
   const onlineStatus = useOnlineStatus();
 
   return (
-    <div id="Header" className="header">
-      <img className="header-logo" src={LOGO_URL} />
-      <div className="nav-items">
-        <div className="nav-text">
+    <div
+      id="Header"
+      className="flex border-solid border-black border-2 justify-between m-1"
+    >
+      <img className="h-40" src={LOGO_URL} />
+      <div className="flex flex-wrap content-center ">
+        <div className="mr-12 text-lg">
           {"Online Status:" + (onlineStatus ? "🟢" : "🔴")}
         </div>
 
-        <Link className="nav-text" to="/">
+        <Link className="mr-12 text-lg" to="/">
           Home
         </Link>
-        <Link className="nav-text" to="/grocery">
+        <Link className="mr-12 text-lg" to="/grocery">
           Grocery
         </Link>
-        <Link className="nav-text" to="/about">
+        <Link className="mr-12 text-lg" to="/about">
           About Us
         </Link>
-        <Link className="nav-text" to="/contact">
+        <Link className="mr-12 text-lg" to="/contact">
           Contact Us
         </Link>
         <button
-          className="login-btn"
+          className="h-8 mr-2 w-20 cursor-pointer border-solid border-2 border-black bg-green-300 rounded-xl"
           onClick={() => {
             console.log("clicked");
 

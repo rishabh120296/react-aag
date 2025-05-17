@@ -1,5 +1,5 @@
 import { CDN_DISH_URL } from "../utils/constants";
-ResMenuItemCard = (props) => {
+const ResMenuItemCard = (props) => {
   const { imageId, name, price, description, ratings } = props?.dishInfo;
   return (
     <div className="dish-container">

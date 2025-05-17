@@ -15,7 +15,7 @@ const BodyComponent = () => {
     fetch_data();
   }, []);
 
-  fetch_data = async () => {
+  const fetch_data = async () => {
     const response = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4302094&lng=78.51078009999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
@@ -37,9 +37,9 @@ const BodyComponent = () => {
     <ShimerComponent></ShimerComponent>
   ) : (
     <div>
-      <div className="filter">
+      <div className="filter m-1">
         <button
-          className="filter-btn"
+          className="m-2 cursor-pointer bg-green-300 p-2 rounded-xl"
           onClick={(event) => {
             console.log(event);
             setlistOfRestaurants(
@@ -52,14 +52,14 @@ const BodyComponent = () => {
           Top Rated Restaurants
         </button>
         <input
-          className="search-inputbox"
+          className="m-2 border-black border-2 border-solid"
           onChange={(e) => {
             console.log(e);
             setSearchTerm(e.target.value);
           }}
         ></input>
         <button
-          className="search-btn"
+          className="m-2 cursor-pointer bg-green-300 p-2 rounded-xl"
           onClick={() => {
             console.log(searchTerm);
 
@@ -77,7 +77,7 @@ const BodyComponent = () => {
           Search
         </button>
       </div>
-      <div className="res-card-container">
+      <div className="flex flex-wrap gap-8 mx-4">
         {filteredRestaurants.map((restaurant) => (
           <Link
             key={restaurant.info.id}
