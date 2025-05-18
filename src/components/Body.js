@@ -1,15 +1,18 @@
 import useOnlineStatus from "../utils/useOnlineStatus";
 import RestaurantCard from "./RestaurantCard";
 import ShimerComponent from "./Shimer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router";
+import { withDiscountBadge } from "./RestaurantCard";
+import UserContext from "../utils/UserContext";
+
 const BodyComponent = () => {
   const [listOfRestaurants, setlistOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurant] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const { user, setUser } = useContext(UserContext);
   const onlineStatus = useOnlineStatus();
-
+  const RestaurantWithDiscount = withDiscountBadge(RestaurantCard);
   useEffect(() => {
     //console.log("FETCH");
     fetch_data();
@@ -22,9 +25,10 @@ const BodyComponent = () => {
 
     let data = await response.json();
 
-    console.log(data);
+    //console.log(data);
 
     data = data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
+    //console.log(data.info);
     setlistOfRestaurants(data);
     setFilteredRestaurant(data);
   };
@@ -76,6 +80,13 @@ const BodyComponent = () => {
         >
           Search
         </button>
+        <input
+          className="m-2 border-black border-2 border-solid"
+          placeholder="Enter User"
+          onChange={(e) => {
+            setUser(e.target.value);
+          }}
+        ></input>
       </div>
       <div className="flex flex-wrap gap-8 mx-4">
         {filteredRestaurants.map((restaurant) => (
@@ -83,7 +94,13 @@ const BodyComponent = () => {
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resinfo={restaurant.info} />
+            {restaurant?.info?.aggregatedDiscountInfoV3?.header.includes(
+              "OFF"
+            ) ? (
+              <RestaurantWithDiscount resinfo={restaurant.info} />
+            ) : (
+              <RestaurantCard resinfo={restaurant.info} />
+            )}
           </Link>
         ))}
       </div>

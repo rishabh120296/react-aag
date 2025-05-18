@@ -1,3 +1,4 @@
+import UserContext from "../utils/UserContext";
 import { User } from "./User";
 import React from "react";
 
@@ -26,6 +27,11 @@ export class AboutComponent extends React.Component {
     return (
       <div>
         <h1>About Us</h1>
+
+        <UserContext.Consumer>
+          {({ loggedInUser }) => <h2>{"Hello " + loggedInUser}</h2>}
+        </UserContext.Consumer>
+
         <p>
           Good Food makes food ordering effortless! With a wide range of
           cuisines from top restaurants, secure payments, and fast delivery, we

@@ -16,4 +16,21 @@ const RestaurantCard = (resdata) => {
   );
 };
 
+export const withDiscountBadge = () => {
+  return (props) => {
+    console.log(props);
+    const aggregatedDiscountInfoV3 = props?.resinfo?.aggregatedDiscountInfoV3;
+    console.log(aggregatedDiscountInfoV3?.header);
+    return (
+      <div>
+        <div className="bg-black text-white absolute">
+          {aggregatedDiscountInfoV3?.header +
+            aggregatedDiscountInfoV3?.subHeader}
+        </div>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
 export default RestaurantCard;

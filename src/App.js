@@ -7,19 +7,35 @@ import ContactComponent from "./components/Contact";
 import ErrorComponent from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 //import Grocery from "./components/Grocery";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useContext } from "react";
 import ShimerComponent from "./components/Shimer";
+import UserContext from "./utils/UserContext";
+import { useState, useEffect } from "react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
 const AppComponent = () => {
+  const { loggedInUser } = useContext(UserContext);
+
+  const [user, setUser] = useState(loggedInUser);
+
+  useEffect(() => {
+    const data = {
+      name: "Aarushi",
+    };
+
+    setUser(data.name);
+  }, []);
+
   return (
-    <div>
-      <HeaderComponent />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: user, setUser }}>
+      <div>
+        <HeaderComponent />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 
